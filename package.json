@@ -1,0 +1,27 @@
+{
+  "name": "adelheidjs",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "clean": "ts-clean-built --all --out build --dir src",
+    "build": "npm run clean && tsc",
+    "dev": "nodemon src/app.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@types/mysql": "^2.15.20",
+    "ascii-table": "^0.0.9",
+    "discord.js": "^13.6.0",
+    "dotenv": "^14.2.0",
+    "mysql": "^2.18.1",
+    "ts-node": "^10.4.0",
+    "wokcommands": "^1.5.3"
+  },
+  "devDependencies": {
+    "ts-clean-built": "^1.2.1",
+    "typescript": "^4.4.4"
+  }
+}

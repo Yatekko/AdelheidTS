@@ -1,0 +1,7 @@
+.env
+node_modules
+build
+commands/ping.ts
+package-lock.json
+.vscode/launch.json
+tsconfig.json
