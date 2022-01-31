@@ -43,5 +43,5 @@ dawn_con.connect(err =>{
 	console.log(`MySQL connected successfully to ${dawn_con.config.host}`);
 });
 
-
-client.login(process.env.TOKEN);
+const token = (process.platform === 'linux' ? process.env.TOKEN : process.env.TOKEN_DEV);
+client.login(token);
