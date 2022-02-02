@@ -39,7 +39,6 @@ export default (client: Client) => {
 			{
 				let gmlevel = '';
 				if (results[i].gm > 1) gmlevel = '[GM]';
-				//table.addRow(`${gmlevel}${results[i].character}`, `${results[i].job}${results[i].level}/${results[i].subjob}${results[i].sublevel}`, `${results[i].location}`);
 				table.addRow(`${gmlevel}${results[i].character}`, `${results[i].job}${results[i].level}` + (results[i].subjob == 0 ? '' : `/${results[i].subjob}${results[i].sublevel}`), `${results[i].location}`);
 
 			}
