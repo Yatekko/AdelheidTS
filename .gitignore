@@ -2,6 +2,7 @@
 node_modules
 build
 commands/ping.ts
+commands/test.ts
 package-lock.json
 .vscode/launch.json
 tsconfig.json
