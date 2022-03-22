@@ -1,6 +1,6 @@
 import { TextChannel, Client } from "discord.js";
 const AsciiTable = require('ascii-table')
-import { dawn_con } from "../src/app";
+import { dawn_con, online_channel } from "../src/app";
 import dotenv from 'dotenv';
 dotenv.config();
 
@@ -16,8 +16,6 @@ export const config = {
 }
 
 export default (client: Client) => {
-	const channel = client.channels.cache.get(process.env.DAWN_CHANNEL!) as TextChannel;
-
 	const updateList = async () => {
 		let table = new AsciiTable('Players Online')
 			.setHeading('Character', 'Job', 'Location');
@@ -26,7 +24,7 @@ export default (client: Client) => {
 		{
 			if (err)
 			{
-				channel.bulkDelete(5).then(() => channel.send(`${err.message}`));
+				online_channel.bulkDelete(5).then(() => online_channel.send(`${err.message}`));
 				return;
 			}
 
@@ -43,7 +41,7 @@ export default (client: Client) => {
 
 			}
 
-			channel.bulkDelete(5).then(() => channel.send(`\`\`\`\n${table.toString()}\`\`\``));
+			online_channel.bulkDelete(5).then(() => online_channel.send(`\`\`\`\n${table.toString()}\`\`\``));
 		})
 		setTimeout(updateList, 1000 * 60);
 	}

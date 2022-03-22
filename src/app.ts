@@ -1,4 +1,4 @@
-import DiscordJS, { Intents } from 'discord.js';
+import DiscordJS, { Channel, Guild, Intents, TextChannel } from 'discord.js';
 import WOKCommands from 'wokcommands';
 import mongoose from 'mongoose';
 import path from 'path';
@@ -20,6 +20,7 @@ client.on('ready', async () => {
 		commandsDir: path.join(__dirname, '../commands'),
 		featuresDir: path.join(__dirname, '../features'),
 		ignoreBots: true,
+		typeScript: (process.platform === 'win32'),
 		testServers: [process.env.OWNER_GUILD!],
 		botOwners: [process.env.OWNER_ID!],
 		mongoUri: process.env.MONGO_URI
@@ -43,5 +44,25 @@ dawn_con.connect(err =>{
 	console.log(`MySQL connected successfully to ${dawn_con.config.host}`);
 });
 
-const token = (process.platform === 'linux' ? process.env.TOKEN : process.env.TOKEN_DEV);
+let token;
+let guild: Guild;
+let online_channel: TextChannel;
+
+if (process.platform === 'linux') {
+	token = process.env.TOKEN;
+	client.guilds.fetch(process.env.DAWN_GUILD!).then(i => {
+		guild = i as Guild;
+		guild.channels.fetch(process.env.DAWN_CHANNEL!).then(j => online_channel = j as TextChannel);
+	});
+}
+else {
+	token = process.env.DEV_TOKEN;
+	client.guilds.fetch(process.env.OWNER_GUILD!).then(i => {
+		guild = i as Guild;
+		guild.channels.fetch(process.env.DEV_CHANNEL!).then(j => online_channel = j as TextChannel);
+	});
+}
+
 client.login(token);
+
+export { guild, online_channel };
